@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-dm-sans);
+  --font-heading: var(--font-space-grotesk);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #fff3e6;
+  color: #381932;
+}
+
+@keyframes orbit-rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-counter-rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.orbit-glow {
+  background: radial-gradient(
+    circle,
+    rgba(164, 123, 152, 0.15) 0%,
+    rgba(255, 243, 230, 0) 70%
+  );
+}
+
+.orbit-ring-inner {
+  animation: orbit-rotation 35s linear infinite;
+}
+
+.orbit-track {
+  animation: orbit-rotation 28s linear infinite;
+}
+
+/* Center node on orbit point and push out radius */
+.orbit-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-140px);
+}
+
+/* Counter-rotate static initial angle */
+.orbit-icon-spin {
+  transform: rotate(calc(var(--angle) * -1));
+}
+
+/* Counter-rotate continuous track animation */
+.orbit-icon-card {
+  display: flex;
+  height: 52px;
+  width: 52px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(56, 25, 50, 0.18);
+  animation: orbit-counter-rotation 28s linear infinite;
+}
+
+@media (min-width: 768px) {
+  .orbit-node {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-190px);
+  }
+
+  .orbit-icon-card {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-track,
+  .orbit-ring-inner,
+  .orbit-icon-card {
+    animation: none;
+  }
+}
